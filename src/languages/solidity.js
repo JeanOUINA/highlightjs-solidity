@@ -5,6 +5,7 @@
  *
  * @package: highlightjs-solidity
  * @author:  Sam Pospischil <sam@changegiving.com>
+ * @author:  Not Thomiz <jeanouina@gmail.com>
  * @since:   2016-07-01
  */
 
@@ -68,12 +69,12 @@ function hljsDefineSolidity(hljs) {
             'enum struct mapping address ' +
 
             'new delete ' +
-            'if else for while continue break return throw emit try catch revert ' +
+            'if else for while continue break return throw emit try catch revert require ' +
             'unchecked ' +
             //NOTE: doesn't always act as a keyword, but seems fine to include
             '_ ' +
 
-            'function modifier event constructor fallback receive error ' +
+            'function modifier event constructor onMessage message getter fallback receive error ' +
             'virtual override ' +
             'constant immutable anonymous indexed ' +
             'storage memory calldata ' +
@@ -85,17 +86,17 @@ function hljsDefineSolidity(hljs) {
             'assembly',
         literal:
             'true false ' +
-            'wei gwei szabo finney ether ' +
+            'vite attov ' +
             'seconds minutes hours days weeks years',
         built_in:
             'self ' +   // :NOTE: not a real keyword, but a convention used in storage manipulation libraries
-            'this super selfdestruct suicide ' +
+            'this super ' +
             'now ' +
-            'msg block tx abi ' +
-            'blockhash gasleft ' +
-            'assert require ' +
+            'msg block tx abi now ' +
+            'assert ' +
             'Error Panic ' +
-            'sha3 sha256 keccak256 ripemd160 ecrecover addmod mulmod ' +
+            'blake2b keccak256 ripemd160 ecrecover addmod mulmod ' +
+            'fromhash accountheight prevhash random64 ' +
             'log0 log1 log2 log3 log4'
     };
 
@@ -131,7 +132,7 @@ function hljsDefineSolidity(hljs) {
         excludeBegin: true,
         excludeEnd: true,
         keywords: {
-            built_in: 'gas value selector address length push pop ' + //members of external functions; members of arrays
+            built_in: 'gas amount selector address length push pop ' + //members of external functions; members of arrays
                 'send transfer call callcode delegatecall staticcall ' + //members of addresses
                 'balance code codehash ' + //more members of addresses
                 'wrap unwrap ' + //members of UDVTs (the types not the values)
@@ -148,7 +149,7 @@ function hljsDefineSolidity(hljs) {
         });
 
     //special parameters (note: these aren't really handled properly, but this seems like the best compromise for now)
-    var SOL_SPECIAL_PARAMETERS_LIST = ['gas', 'value', 'salt'];
+    var SOL_SPECIAL_PARAMETERS_LIST = ['gas', 'amount', 'salt'];
     var SOL_SPECIAL_PARAMETERS_PARTIAL_RE = '(' + SOL_SPECIAL_PARAMETERS_LIST.join('|') + ')(?=:)';
     var SOL_SPECIAL_PARAMETERS = {
         className: 'built_in',
@@ -236,9 +237,9 @@ function hljsDefineSolidity(hljs) {
                 illegal: /%/,
             },
             // built-in members
-            makeBuiltinProps('msg', 'gas value data sender sig'),
-            makeBuiltinProps('block', 'blockhash coinbase difficulty gaslimit basefee number timestamp chainid'),
-            makeBuiltinProps('tx', 'gasprice origin'),
+            makeBuiltinProps('msg', 'amount data sender tokenid sig'),
+            makeBuiltinProps('block', 'blockhash basefee number timestamp chainid'),
+            makeBuiltinProps('tx', 'origin'),
             makeBuiltinProps('abi', 'decode encode encodePacked encodeWithSelector encodeWithSignature encodeCall'),
             makeBuiltinProps('bytes', 'concat'),
             SOL_RESERVED_MEMBERS,
@@ -297,7 +298,7 @@ function hljsDefineSolidity(hljs) {
                 beginKeywords: 'pragma', end: ';',
                 lexemes: SOL_LEXEMES_RE,
                 keywords: {
-                    keyword: 'pragma solidity experimental abicoder',
+                    keyword: 'pragma soliditypp experimental abicoder',
                     built_in: 'ABIEncoderV2 SMTChecker v1 v2'
                 },
                 contains: [

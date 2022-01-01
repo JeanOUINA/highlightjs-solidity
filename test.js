@@ -8,7 +8,7 @@ defineSolidity(hljs);
 
 // Receives a Solidity snippet and returns an array of [type, text] tuples.
 // Type is the detected token type, and text the corresponding source text.
-function getTokens(source, language = 'solidity') {
+function getTokens(source, language = 'soliditypp') {
   const { value } = hljs.highlight(language, source);
   const frag = parse5.parseFragment(value);
 

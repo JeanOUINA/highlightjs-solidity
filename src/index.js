@@ -5,6 +5,7 @@
  *
  * @package: highlightjs-solidity
  * @author:  Sam Pospischil <sam@changegiving.com>
+ * @author:  Not Thomiz <jeanouina@gmail.com>
  * @since:   2016-07-01
  */
 
@@ -12,7 +13,7 @@ const solidityGrammar = require("./languages/solidity.js");
 const yulGrammar = require("./languages/yul.js");
 
 module.exports = function(hljs) {
-    hljs.registerLanguage('solidity', solidityGrammar);
+    hljs.registerLanguage('soliditypp', solidityGrammar);
     hljs.registerLanguage('yul', yulGrammar);
 };
 

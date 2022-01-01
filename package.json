@@ -1,7 +1,7 @@
 {
-  "name": "highlightjs-solidity",
+  "name": "highlightjs-soliditypp",
   "version": "2.0.3",
-  "description": "highlight.js syntax definition for Ethereum's Solidity language",
+  "description": "highlight.js syntax definition for Vite's Soliditypp language",
   "main": "src/index.js",
   "files": [
     "dist",
@@ -21,7 +21,7 @@
     "highlightjs",
     "syntax"
   ],
-  "author": "pospi",
+  "author": "jeanouina",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/highlightjs/highlightjs-solidity/issues"
