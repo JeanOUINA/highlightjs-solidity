@@ -62,7 +62,7 @@ function hljsDefineSolidity(hljs) {
 
     var SOL_KEYWORDS = {
         keyword:
-            'var bool string ' +
+            'var bool string tokenId ' +
             'int uint ' + intTypesString + uintTypesString +
             'byte bytes ' + bytesTypesString +
             'fixed ufixed ' + fixedTypesString + ufixedTypesString +
